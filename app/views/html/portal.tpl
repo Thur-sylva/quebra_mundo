@@ -29,6 +29,7 @@
     </form>
 
     <p style="margin-top:30px;"><a href="/" style="color:white;">← Voltar para a home</a></p>
+    <p style="margin-top:15px;"><a href="/cadastro" style="color:#C7FF00;">Ainda não tenho conta — cadastrar</a></p>
 
 </body>
 </html>

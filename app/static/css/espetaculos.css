@@ -1,0 +1,86 @@
+#espetaculos {
+    background: #0d0d0d;
+    padding: 120px 8%;
+}
+
+.espetaculos-titulo {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 70px;
+}
+
+.espetaculos-titulo span {
+    color: #C7FF00;
+    letter-spacing: 5px;
+    font-size: 14px;
+}
+
+.espetaculos-titulo h2 {
+    margin-top: 20px;
+    font-size: 44px;
+}
+
+.espetaculos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.espetaculo-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, #5E2CA5, #1a1a1a);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.espetaculo-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(199, 255, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.espetaculo-item:hover .espetaculo-overlay {
+    opacity: 1;
+}
+
+.espetaculo-overlay-conteudo {
+    text-align: center;
+    padding: 20px;
+    color: #090909;
+}
+
+.espetaculo-overlay-conteudo span {
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.espetaculo-overlay-conteudo h3 {
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+.espetaculo-overlay-conteudo p {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.espetaculos-vazio {
+    text-align: center;
+    color: #888;
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    .espetaculos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

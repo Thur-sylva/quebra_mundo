@@ -12,6 +12,7 @@ class Application():
             'espetaculos_lista': self.espetaculos_lista,
             'espetaculos_form': self.espetaculos_form,
             'portal': self.portal,
+            'cadastro': self.cadastro,
         }
         self.__model = EspetaculoRecord()
         self.__auth = AuthRecord()
@@ -84,3 +85,9 @@ class Application():
             redirect('/portal')
         self.__model.deletar(id)
         redirect('/espetaculos')
+    
+    def register_user(self, username, password):
+        return self.__auth.register(username, password)
+
+    def cadastro(self, erro=False):
+        return template('cadastro', erro=erro)

@@ -1,5 +1,5 @@
 from app.controllers.application import Application
-from bottle import Bottle, run, static_file
+from bottle import Bottle, run, static_file, request, response, redirect
 import bottle
 import os
 
@@ -22,6 +22,30 @@ def helper():
 @app.route("/")
 def home():
     return ctl.render("home")
+
+
+@app.route('/portal', method='GET')
+def login():
+    return ctl.render('portal')
+
+
+@app.route('/portal', method='POST')
+def action_portal():
+    username = request.forms.get('username')
+    password = request.forms.get('password')
+    session_id = ctl.authenticate_user(username, password)
+    if session_id:
+        response.set_cookie('session_id', session_id, httponly=True, max_age=3600)
+        redirect('/espetaculos')
+    else:
+        return ctl.portal(erro=True)
+
+
+@app.route('/logout', method='POST')
+def logout():
+    ctl.logout_user()
+    response.delete_cookie('session_id')
+    redirect('/')
 
 
 @app.route('/espetaculos')
@@ -52,6 +76,21 @@ def atualizar(id):
 @app.route('/espetaculos/deletar/<id:int>')
 def deletar(id):
     return ctl.espetaculos_deletar(id)
+
+#@app.route('/cadastro', method='GET')
+#def cadastro():
+    return ctl.render('cadastro')
+
+
+#@app.route('/cadastro', method='POST')
+#def action_cadastro():
+    username = request.forms.get('username')
+    password = request.forms.get('password')
+    sucesso = ctl.register_user(username, password)
+    if sucesso:
+        redirect('/portal')
+    else:
+        return ctl.cadastro(erro=True)
 
 
 if __name__ == '__main__':

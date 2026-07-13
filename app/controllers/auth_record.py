@@ -38,3 +38,18 @@ class AuthRecord():
 
     def is_logged_in(self, session_id):
         return session_id in self.__authenticated_users
+    
+    def register(self, username, password):
+    
+        for user in self.__user_accounts:
+            if user.username == username:
+                return False  # já existe
+
+        novo_usuario = UserAccount(username, password)
+        self.__user_accounts.append(novo_usuario)
+
+        with open("app/controllers/db/user_accounts.json", "w") as arquivo_json:
+            user_data = [vars(u) for u in self.__user_accounts]
+            json.dump(user_data, arquivo_json)
+
+        return True

@@ -1,167 +1,111 @@
 #sobre{
-
     background:#111;
-
     padding:120px 8%;
-
 }
 
 .sobre-texto{
-
     text-align:center;
-
     max-width:800px;
-
     margin:0 auto 80px;
-
 }
 
 .sobre-texto span{
-
     color:#C7FF00;
-
     letter-spacing:5px;
-
     font-size:14px;
-
 }
 
 .sobre-texto h2{
-
     margin:20px 0;
-
     font-size:48px;
-
 }
 
 .sobre-texto p{
-
     color:#ccc;
-
     line-height:32px;
-
     font-size:18px;
-
 }
 
-.carrossel{
+/* ---- Carrossel de equipe ---- */
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:40px;
-
+.equipe-carrossel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.cards{
-
-    display:flex;
-
-    gap:30px;
-
+.equipe-viewport {
+    overflow: hidden;
+    width: 100%;
+    max-width: 720px;
 }
 
-.card{
-
-    width:260px;
-
-    transition:.4s;
-
-    text-align:center;
-
+.equipe-track {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    transition: transform 0.5s ease;
 }
 
-.card.ativo{
-
-    transform:scale(1.08);
-
+.equipe-card {
+    flex: 0 0 auto;
+    width: 200px;
+    text-align: center;
 }
 
-.foto{
-
-    width:260px;
-
-    height:340px;
-
-    background:#2a2a2a;
-
-    border-radius:18px;
-
+.equipe-moldura {
+    width: 200px;
+    height: 260px;
+    padding: 8px;
+    background: #1a1a1a;
+    border: 2px solid #C7FF00;
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.5);
 }
 
-.card h3{
-
-    margin-top:20px;
-
-    font-size:24px;
-
+.equipe-moldura img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+    filter: grayscale(30%);
+    transition: 0.3s;
 }
 
-.card p{
-
-    color:#C7FF00;
-
-    margin-top:8px;
-
+.equipe-card:hover .equipe-moldura img {
+    filter: grayscale(0%);
 }
 
-.btn-slide{
-
-    width:55px;
-
-    height:55px;
-
-    border-radius:50%;
-
-    border:none;
-
-    background:#222;
-
-    color:white;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
+.equipe-card h3 {
+    margin-top: 18px;
+    font-size: 17px;
+    font-weight: 600;
 }
 
-.btn-slide:hover{
-
-    background:#5E2CA5;
-
+.btn-slide.seta-esquerda,
+.btn-slide.seta-direita {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: #1a1a1a;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 5;
+    transition: 0.3s;
 }
 
-.indicadores{
+.btn-slide.seta-esquerda { left: -10px; }
+.btn-slide.seta-direita { right: -10px; }
 
-    display:flex;
-
-    justify-content:center;
-
-    gap:12px;
-
-    margin-top:40px;
-
-}
-
-.indicadores span{
-
-    width:12px;
-
-    height:12px;
-
-    border-radius:50%;
-
-    background:#555;
-
-}
-
-.indicadores .ativo{
-
-    background:#C7FF00;
-
+.btn-slide:hover {
+    background: #C7FF00;
+    color: #090909;
 }

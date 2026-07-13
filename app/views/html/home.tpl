@@ -43,7 +43,7 @@
     % include('partials/footer')
 
     <script src="/static/js/main.js"></script>
-    <script src="/static/js/carrossel.js"></script>
+    <script src="/static/js/equipe.js"></script>
 
 </body>
 
