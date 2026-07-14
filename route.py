@@ -1,17 +1,41 @@
+from gevent import monkey
+monkey.patch_all()
+
 from app.controllers.application import Application
 from bottle import Bottle, run, static_file, request, response, redirect
+from bottle.ext.websocket import GeventWebSocketServer
+from bottle.ext.websocket import websocket
 import bottle
 import os
+import json
+
+from app.controllers.ws_manager import WSManager
+
+
 
 bottle.TEMPLATE_PATH.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'app', 'views', 'html'))
 
 app = Bottle()
 ctl = Application()
+ws_manager = WSManager()
+ctl.set_ws_manager(ws_manager)  # vamos criar esse método na Application
 
 
 @app.route('/static/<filepath:path>')
 def serve_static(filepath):
     return static_file(filepath, root='./app/static')
+
+
+@app.route('/websocket', apply=[websocket])
+def handle_websocket(ws):
+    ws_manager.conectar(ws)
+    try:
+        while True:
+            msg = ws.receive()
+            if msg is None:
+                break
+    finally:
+        ws_manager.desconectar(ws)
 
 
 @app.route('/helper')
@@ -77,21 +101,6 @@ def atualizar(id):
 def deletar(id):
     return ctl.espetaculos_deletar(id)
 
-#@app.route('/cadastro', method='GET')
-#def cadastro():
-    return ctl.render('cadastro')
-
-
-#@app.route('/cadastro', method='POST')
-#def action_cadastro():
-    username = request.forms.get('username')
-    password = request.forms.get('password')
-    sucesso = ctl.register_user(username, password)
-    if sucesso:
-        redirect('/portal')
-    else:
-        return ctl.cadastro(erro=True)
-
 
 if __name__ == '__main__':
-    run(app, host='0.0.0.0', port=8080, debug=True)
+    run(app, host='0.0.0.0', port=8080, server=GeventWebSocketServer, debug=True)

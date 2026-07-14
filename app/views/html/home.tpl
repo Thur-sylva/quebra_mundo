@@ -44,6 +44,10 @@
 
     <script src="/static/js/main.js"></script>
     <script src="/static/js/equipe.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/equipe.js"></script>
+    <script src="/static/js/websocket.js"></script>
+    
 
 </body>
 

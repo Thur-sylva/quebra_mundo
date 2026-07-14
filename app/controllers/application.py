@@ -16,6 +16,10 @@ class Application():
         }
         self.__model = EspetaculoRecord()
         self.__auth = AuthRecord()
+        self.__ws_manager = None
+
+    def set_ws_manager(self, ws_manager):
+        self.__ws_manager = ws_manager
 
     def render(self, page, parameter=None):
         content = self.pages.get(page, self.helper)
@@ -69,6 +73,7 @@ class Application():
         descricao = request.forms.get('descricao')
         data = request.forms.get('data')
         self.__model.salvar(titulo, descricao, data)
+        self.__ws_manager.transmitir('atualizar')
         redirect('/espetaculos')
 
     def espetaculos_atualizar(self, id):
@@ -78,14 +83,16 @@ class Application():
         descricao = request.forms.get('descricao')
         data = request.forms.get('data')
         self.__model.atualizar(id, titulo, descricao, data)
+        self.__ws_manager.transmitir('atualizar')
         redirect('/espetaculos')
 
     def espetaculos_deletar(self, id):
         if not self.is_authenticated():
             redirect('/portal')
         self.__model.deletar(id)
+        self.__ws_manager.transmitir('atualizar')
         redirect('/espetaculos')
-    
+
     def register_user(self, username, password):
         return self.__auth.register(username, password)
 

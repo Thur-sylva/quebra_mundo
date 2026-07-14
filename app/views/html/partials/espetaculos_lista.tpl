@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/navbar.css">
+    <script src="/static/js/websocket.js"></script>
 </head>
 <body style="background:#090909; color:white; padding: 100px 8% 60px;">
 
