@@ -18,7 +18,7 @@ bottle.TEMPLATE_PATH.insert(0, os.path.join(os.path.dirname(os.path.abspath(__fi
 app = Bottle()
 ctl = Application()
 ws_manager = WSManager()
-ctl.set_ws_manager(ws_manager)  # vamos criar esse método na Application
+ctl.set_ws_manager(ws_manager) 
 
 
 @app.route('/static/<filepath:path>')
